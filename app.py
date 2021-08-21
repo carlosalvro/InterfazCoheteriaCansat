@@ -2,14 +2,11 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import os
+
+from dash_html_components.Button import Button
+from dash_html_components.Div import Div
 import functions
 
-PATH_IMGS = r'./Imagenes'
-IMGS = os.listdir(PATH_IMGS)
-IMGS_PATH = [os.path.join(PATH_IMGS,i) for i in IMGS ]
-### DEFINIMOS LOS LIMITES DE HSV respectivamente ##################3
-min_default = [0,0,0]
-max_default = [180,255,255]
 
 ##### INICIAMOS LA APP #####
 app = dash.Dash(__name__)
@@ -31,15 +28,14 @@ app.layout= html.Div(
       children=[
         # iniciamos componente de los tabs (las pestañas para cambiar de métrica a imagen)
         dcc.Tabs(className='main-tabs',
-                  value='tab-metrica',children=[
+                  value='tab-cohete',children=[
           # iniciamos el primer tab de metrica
-          dcc.Tab(id='tab-metrica',
+          dcc.Tab(id='tab-cohete',
                   className='custom-tab',
                   selected_className='custom-tab--selected', 
-                  label='Métrica', 
-                  value='tab-metrica', children=[
+                  label='Cohete', 
+                  value='tab-cohete', children=[
                     ###Contenido del primer tab
-
 ####Este componente interval es muy importante, es el que nos da el tiempo de actualización de la página                    
                     #ES SU UNÍCO PROPOSITO (ES INVISIBLE, NO SE MOSTRARÁ NADA EN LA PÁGINA)
                     dcc.Interval(
@@ -52,30 +48,229 @@ app.layout= html.Div(
                       className='tab-section',
                       children=[
                         #TITULO
-                        html.H2('Métrica'),
+                        html.H2('Cohete'),
                         #CONTENEDOR PRINCIPAL
                         html.Div(
-                          className='principal-metrica',
+                          className='principal-metrica-cohete',
                           children=[
+                            # Sección BOTONES
+                            html.Div(
+                              className="card-1 co-buttons",
+                              children = [
+                                html.Button('Iniciar', className='start-button'),
+                                html.Button('Detener', className='stop-button')
+                              ]
+                            ),
                             # Sección ALTITUD
                             html.Div(
-                              className="card-1 altitud",
+                              className="card-1 co-time",
                               children = [
-                                html.H4("Altitud"),
-                                html.H3(id='altitud', children="120"),
-                                html.P("metros")
+                                html.H4("Tiempo de Misión"),
+                                html.H3("00:00"),
                               ]
                             ),
                             # Sección COORDENADAS
                             html.Div(
-                              className=("card-2 coordenadas"),
+                              className=("card-2 co-coordenadas"),
                               children = [
                                 html.H4("Coordenadas"),
                                 html.Div(
                                   className="subcard-2 values-2",
                                   children = [
-                                    html.H3(id='latitud', children="128.5"),
-                                    html.H3(id='longitud', children="-103.9")
+                                    html.H3("128.5"),
+                                    html.H3("-103.9")
+                                  ]
+                                ),
+                                html.Div(
+                                  className= "subcard-2 uds",
+                                  children = [
+                                    html.P("Latitud"),
+                                    html.P("Longitud")
+                                  ]
+                                )
+                              ]
+                            ),
+                            # Sección ACELEROMETRO
+                            html.Div(
+                              className=("card-3 co-position"),
+                              children = [
+                                html.H4("Posición"),
+                                html.Div(
+                                  className="subcard-3 values-3",
+                                  children = [
+                                    html.H3("128.5"),
+                                    html.H3("-103.9"),
+                                    html.H3("150.0")
+                                  ]
+                                ),
+                                html.Div(
+                                  className= "subcard-3 uds",
+                                  children = [
+                                    html.P("Eje X"),
+                                    html.P("Eje Y"),
+                                    html.P("Eje Z")
+                                  ]
+                                )
+                              ]
+                            ),
+                            # EStados
+                            html.Div(
+                              className= "estados",
+                              children = [
+                                html.Div(
+                                  className="estado",
+                                  children=[
+                                    html.Div(id="piro1"),
+                                    html.H4("Carga Pirotecnica 1")
+                                  ]
+                                ),
+                                html.Div(
+                                  className="estado",
+                                  children=[
+                                    html.Div(id="piro2"),
+                                    html.H4("Carga Pirotecnica 2")
+                                  ]
+                                ),
+                                html.Div(
+                                  className="estado",
+                                  children=[
+                                    html.Div(id="igni1"),
+                                    html.H4("Carga de ignición 1")
+                                  ]
+                                ),
+                                html.Div(
+                                  className="estado",
+                                  children=[
+                                    html.Div(id="igni2"),
+                                    html.H4("Carga de ignición 2")
+                                  ]
+                                ),
+                                html.Div(
+                                  className="estado",
+                                  children=[
+                                    html.Div(id="switch1"),
+                                    html.H4("Switch 1")
+                                  ]
+                                ),
+                                html.Div(
+                                  className="estado",
+                                  children=[
+                                    html.Div(id="switch2"),
+                                    html.H4("Switch 2")
+                                  ]
+                                ),
+                                html.Div(
+                                  className="estado",
+                                  children=[
+                                    html.Div(id="switch3"),
+                                    html.H4("Switch 3")
+                                  ]
+                                ),
+                              ]
+                            ),
+                            html.Div(className="card-1 nada"),
+                            # Sección VELOCIDAD
+                            html.Div(
+                              className="card-1 velocidad",
+                              children = [
+                                html.H4("Velocidad"),
+                                html.H3("30"),
+                                html.P("m/s")
+                              ]
+                            ),
+                            # Sección FECHA
+                            html.Div(
+                              className="card-1 fecha",
+                              children = [
+                                html.H4("20-08-2021"),
+                                html.H4("17:43"),
+                              ]
+                            ),
+                            # Sección GRAFICA
+                            html.Div(
+                              className="card-graph",
+                              children= [
+                                dcc.Tabs(
+                                  className="tabs-subgraph",
+                                  value="ac-gi-graph",
+                                  children = [
+                                    dcc.Tab( id="ac-gi-graph",
+                                      className="custom-subtab",
+                                      selected_className='custom-subtab--selected',
+                                      label="Cansat",
+                                      value="ac-gi-graph",
+                                      children=[
+                                        html.Div(
+                                          className="graph-ace-giro-container",
+                                          children=[
+                                            dcc.Graph(
+                                              figure=functions.plot_graphs_ace_giro()
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    dcc.Tab(id="cansat-graph2",
+                                      className="custom-subtab",
+                                      selected_className='custom-subtab--selected',
+                                      label="Cansat",
+                                      value="cansat-graph",
+                                      children=[
+                                          html.Div(
+                                          className="graph-cansat-container",
+                                          children=[
+                                            dcc.Graph(
+                                              figure=functions.plot_cansat()
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+          #contenido del segundo tab de imagen 
+          dcc.Tab(id='tab-image',
+                  className='custom-tab', 
+                  selected_className='custom-tab--selected',
+                  label='Cansat', 
+                  value='tab-image', children=[
+                    ###Contenido del segundo tab
+                    ## IMAGEN
+                    html.Div(
+                      className='tab-section',
+                      children=[
+                        # TITULO
+                        html.H2('Cansat'),
+                        # CONTENEDOR PRINCIPAL
+                        html.Div(
+                          className='principal-metrica-cansat',
+                          children=[
+                            # Sección ALTITUD
+                            html.Div(
+                              className="card-1 ca-altitud",
+                              children = [
+                                html.H4("Altitud"),
+                                html.H3("120"),
+                                html.P("metros")
+                              ]
+                            ),
+                            # Sección COORDENADAS
+                            html.Div(
+                              className=("card-2 ca-coordenadas"),
+                              children = [
+                                html.H4("Coordenadas"),
+                                html.Div(
+                                  className="subcard-2 values-2",
+                                  children = [
+                                    html.H3("128.5"),
+                                    html.H3("-103.9")
                                   ]
                                 ),
                                 html.Div(
@@ -92,7 +287,7 @@ app.layout= html.Div(
                               className="card-1 temperatura",
                               children = [
                                 html.H4("Temperatura"),
-                                html.H3(id='temperatura', children="30"),
+                                html.H3("30"),
                                 html.P("°C")
                               ]
                             ),
@@ -101,7 +296,7 @@ app.layout= html.Div(
                               className="card-1 presión",
                               children = [
                                 html.H4("Presión"),
-                                html.H3(id ='presion', children="2"),
+                                html.H3("2"),
                                 html.P("Pa")
                               ]
                             ),
@@ -110,7 +305,7 @@ app.layout= html.Div(
                               className="card-1 humedad",
                               children = [
                                 html.H4("Humedad"),
-                                html.H3(id='humedad', children="3"),
+                                html.H3("3"),
                               ]
                             ),
                             # Sección ACELEROMETRO
@@ -121,9 +316,9 @@ app.layout= html.Div(
                                 html.Div(
                                   className="subcard-3 values-3",
                                   children = [
-                                    html.H3(id ='aceleX', children="128.5"),
-                                    html.H3(id ='aceleY', children="-103.9"),
-                                    html.H3(id ='aceleZ', children="150.0")
+                                    html.H3("128.5"),
+                                    html.H3("-103.9"),
+                                    html.H3("150.0")
                                   ]
                                 ),
                                 html.Div(
@@ -144,9 +339,9 @@ app.layout= html.Div(
                                 html.Div(
                                   className="subcard-3 values-3",
                                   children = [
-                                    html.H3(id ='giroX', children="128.5"),
-                                    html.H3(id ='giroY', children="-103.9"),
-                                    html.H3(id ='giroZ', children="150.0")
+                                    html.H3("128.5"),
+                                    html.H3("-103.9"),
+                                    html.H3("150.0")
                                   ]
                                 ),
                                 html.Div(
@@ -172,8 +367,8 @@ app.layout= html.Div(
                             html.Div(
                               className="card-1 fecha",
                               children = [
-                                html.H4(id="date", children="20-08-2021"),
-                                html.H4(id="hour", children="17:43"),
+                                html.H4("20-08-2021"),
+                                html.H4("17:43"),
                               ]
                             ),
                             # Sección GRAFICA
@@ -184,10 +379,10 @@ app.layout= html.Div(
                                   className="tabs-subgraph",
                                   value="ac-gi-graph",
                                   children = [
-                                    dcc.Tab( id="ac-gi-graph",
+                                    dcc.Tab( id="ac-gi-graph2",
                                       className="custom-subtab",
                                       selected_className='custom-subtab--selected',
-                                      label="Graficas",
+                                      label="Cansat",
                                       value="ac-gi-graph",
                                       children=[
                                         html.Div(
@@ -224,131 +419,6 @@ app.layout= html.Div(
                         )
                       ]
                     )
-                  ]),
-          #contenido del segundo tab de imagen 
-          dcc.Tab(id='tab-image',
-                  className='custom-tab', 
-                  selected_className='custom-tab--selected',
-                  label='Imagen', 
-                  value='tab-image', children=[
-                    ###Contenido del segundo tab
-                    ## IMAGEN
-                    html.Div(
-                      className='tab-section',
-                      children=[
-                        # TITULO
-                        html.H2('Imagen'),
-                        # CONTENEDOR PRINCIPAL
-                        html.Div(
-                          className='principal-image',
-                          children=[
-                            #CONTENEDOR GRAFICA
-                            html.Div(
-                              className='graph-container',
-                              children=[
-                                # GRAFICA
-                                html.Div(
-                                  className= "image-container",
-                                  id= "imagen-cansat",
-                                  children = [
-                                    dcc.Graph(
-                                    className='graph',
-                                    figure=functions.plot_image(IMGS_PATH[1], min_default, max_default)
-                                    ),
-                                  ]
-                                ),
-                                # CONTENEDOR BOTONES GRAFICA
-                                html.Div(
-                                  className='graph-buttons',
-                                  children=[
-                                    # BOTON ATRAS
-                                    html.Button(
-                                      'Atras',
-                                      id='boton-atras',
-                                      n_clicks=0,
-                                      n_clicks_timestamp=-1
-                                    ),
-                                    # BOTON ADELANTE
-                                    html.Button(
-                                      'Adelante',
-                                      id='boton-adelante',
-                                      n_clicks=0,
-                                      n_clicks_timestamp=-1
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            # CONTENEDOR CONTROLADORES
-                            html.Div(
-                              className="controls-container",
-                              children=[
-                                #SLIDERS
-                                html.Div(className='sliders', children=[
-                                  html.H3('Hue'),
-                                  dcc.RangeSlider(
-                                    id='H-slider',
-                                    min = 0,
-                                    max = 180,
-                                    step=1,
-                                    marks = {0:'0',180:'180'},
-                                    value=[33,85],
-                                    allowCross=False,
-                                    updatemode='drag'
-                                  ),
-                                  html.H3('Saturation'),
-                                  dcc.RangeSlider(
-                                    id='S-slider',
-                                    min = 0,
-                                    max = 255,
-                                    step=1,
-                                    marks = {0:'0',255:'255'},
-                                    value=[58,255],
-                                    allowCross=False,
-                                    updatemode='drag'
-                                  ),
-                                  html.H3('Value'),
-                                  dcc.RangeSlider(
-                                    id='V-slider',
-                                    min = 0,
-                                    max = 255,
-                                    step=1,
-                                    marks = {0:'0',255:'255'},
-                                    value=[0,255],
-                                    allowCross=False,
-                                    updatemode='drag'
-                                  )
-                                ]),
-                                # BLURS
-                                html.H3("Desenfoques"),
-                                html.Div(className ='blur-buttons', 
-                                  children=[
-                                    html.Button(
-                                      'Gaussiano',
-                                      id='gauss',
-                                      n_clicks=0,
-                                      n_clicks_timestamp=-1
-                                    ), 
-                                    html.Button(
-                                      'Median',
-                                      id = 'median',
-                                      n_clicks=0,
-                                      n_clicks_timestamp=-1
-                                    )
-                                ]),
-                                # RESET BUTTON
-                                html.Button(
-                                    'Reset',
-                                    id='reset',
-                                    n_clicks=0,
-                                    n_clicks_timestamp=-1
-                                )
-                              ]          
-                            )
-                          ]
-                        )
-                      ]
-                    )
                   ])
         ])
       ]
@@ -360,40 +430,40 @@ app.layout= html.Div(
 ## RECIBE AL CONTADOR LLAMADO INTERVAL DE LA LINEA 47
 ## EL CONTADOR LE DA LA SEÑAL PARA QUE LOS OUTPUTS SE REFRESQUEN
 ## EL INTERVAL TIENE UN TIEMPO DE ACTUALIZACION DE 0.5 SEGUNDOS O 500 MILISEGUNDOS
-@app.callback(
-  dash.dependencies.Output('altitud', 'children'),
-  dash.dependencies.Output('latitud', 'children'),
-  dash.dependencies.Output('longitud', 'children'),
-  dash.dependencies.Output('temperatura', 'children'),
-  dash.dependencies.Output('presion', 'children'),
-  dash.dependencies.Output('humedad', 'children'),
-  dash.dependencies.Output('aceleX', 'children'),
-  dash.dependencies.Output('aceleY', 'children'),
-  dash.dependencies.Output('aceleZ', 'children'),
-  dash.dependencies.Output('giroX', 'children'),
-  dash.dependencies.Output('giroY', 'children'),
-  dash.dependencies.Output('giroZ', 'children'),
-  dash.dependencies.Output('date', 'children'),
-  dash.dependencies.Output('hour', 'children'),
-  [dash.dependencies.Input('interval-component', 'n_intervals')] 
-)
-def data_listener(n):
-  output = functions.open_serial() # ESTA FUNCIÓN TRAE LOS VALORES DEL PUERTO SERIAL
-  al = output[0]
-  la = output[1]
-  lo = output[2]
-  te = output[3]
-  pr = output[4]
-  hu = output[5]
-  ax = output[6]
-  ay = output[7]
-  az = output[8]
-  gx = output[9]
-  gy = output[10]
-  gz = output[11]
-  date = functions.today_date()
-  hour = functions.current_time()
-  return al, la, lo, te, pr, hu, ax, ay, az, gx, gy, gz, date, hour
+# @app.callback(
+#   dash.dependencies.Output('altitud', 'children'),
+#   dash.dependencies.Output('latitud', 'children'),
+#   dash.dependencies.Output('longitud', 'children'),
+#   dash.dependencies.Output('temperatura', 'children'),
+#   dash.dependencies.Output('presion', 'children'),
+#   dash.dependencies.Output('humedad', 'children'),
+#   dash.dependencies.Output('aceleX', 'children'),
+#   dash.dependencies.Output('aceleY', 'children'),
+#   dash.dependencies.Output('aceleZ', 'children'),
+#   dash.dependencies.Output('giroX', 'children'),
+#   dash.dependencies.Output('giroY', 'children'),
+#   dash.dependencies.Output('giroZ', 'children'),
+#   dash.dependencies.Output('date', 'children'),
+#   dash.dependencies.Output('hour', 'children'),
+#   [dash.dependencies.Input('interval-component', 'n_intervals')] 
+# )
+# def data_listener(n):
+#   output = functions.open_serial() # ESTA FUNCIÓN TRAE LOS VALORES DEL PUERTO SERIAL
+#   al = output[0]
+#   la = output[1]
+#   lo = output[2]
+#   te = output[3]
+#   pr = output[4]
+#   hu = output[5]
+#   ax = output[6]
+#   ay = output[7]
+#   az = output[8]
+#   gx = output[9]
+#   gy = output[10]
+#   gz = output[11]
+#   date = functions.today_date()
+#   hour = functions.current_time()
+#   return al, la, lo, te, pr, hu, ax, ay, az, gx, gy, gz, date, hour
 
 
 
@@ -406,48 +476,48 @@ gau = 0
 med = 0
 res = 0
 
-@app.callback(
-  dash.dependencies.Output("imagen-cansat", "children"),
-  [dash.dependencies.Input('boton-adelante','n_clicks'),
-  dash.dependencies.Input('boton-atras','n_clicks'),
-  dash.dependencies.Input('H-slider','value'),
-  dash.dependencies.Input('S-slider','value'),
-  dash.dependencies.Input('V-slider','value'),
-  dash.dependencies.Input('gauss','n_clicks'),
-  dash.dependencies.Input('median','n_clicks'),
-  dash.dependencies.Input('reset','n_clicks')]
-)
-def image_controler(adelante, atras, H, S, V, gauss, median, reset):
-  global gau, med, res
+# @app.callback(
+#   dash.dependencies.Output("imagen-cansat", "children"),
+#   [dash.dependencies.Input('boton-adelante','n_clicks'),
+#   dash.dependencies.Input('boton-atras','n_clicks'),
+#   dash.dependencies.Input('H-slider','value'),
+#   dash.dependencies.Input('S-slider','value'),
+#   dash.dependencies.Input('V-slider','value'),
+#   dash.dependencies.Input('gauss','n_clicks'),
+#   dash.dependencies.Input('median','n_clicks'),
+#   dash.dependencies.Input('reset','n_clicks')]
+# )
+# def image_controler(adelante, atras, H, S, V, gauss, median, reset):
+#   global gau, med, res
 
-  image_number = adelante - atras
-  image = IMGS_PATH[image_number]
-  min = [H[0], S[0], V[0]]
-  max = [H[1], S[1], V[1]]
+#   image_number = adelante - atras
+#   image = IMGS_PATH[image_number]
+#   min = [H[0], S[0], V[0]]
+#   max = [H[1], S[1], V[1]]
 
-  if gauss!=gau:
-    image = functions.gaussian_blur(image)
-    print("Apply 1 time gauss")
-    gau = gauss
-  else:
-    pass
+#   if gauss!=gau:
+#     image = functions.gaussian_blur(image)
+#     print("Apply 1 time gauss")
+#     gau = gauss
+#   else:
+#     pass
 
-  if median!=med:
-    image = functions.median_blur(image)
-    print("Apply 1 time median")
-    med =median
+#   if median!=med:
+#     image = functions.median_blur(image)
+#     print("Apply 1 time median")
+#     med =median
 
-  if reset!= res:
-    image = IMGS_PATH[image_number]
-    res = reset
-  else:
-    pass
+#   if reset!= res:
+#     image = IMGS_PATH[image_number]
+#     res = reset
+#   else:
+#     pass
   
-  return [dcc.Graph(
-            className='graph',
-            figure= functions.plot_image(image, min, max)
-          ),
-        html.P(f'H: {H}  S: {S}  V: {V}')]
+#   return [dcc.Graph(
+#             className='graph',
+#             figure= functions.plot_image(image, min, max)
+#           ),
+#         html.P(f'H: {H}  S: {S}  V: {V}')]
 
 
 if __name__=='__main__':

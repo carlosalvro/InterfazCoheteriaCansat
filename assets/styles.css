@@ -2,10 +2,14 @@
 :root {
   /* Colores */
   --dark: #14152B;
-  --cards: #252743;
+  --cards: #2E4052;
   --regular: #191B3F;
   --light: #298BFE;
   --alter: #2D3052;
+  --red: #F95738;
+  --yellow: #FFC857;
+  --tinto: #412234;
+  --green: #3BC14A;
 }
 *{
   box-sizing: border-box;
@@ -14,13 +18,13 @@
 }
 html {
   font-size: 62.5%;
+  background: linear-gradient(180deg, rgba(46, 64, 82, 0.82) 0%, #6A836C 100%);
+  height: 100vh;
 }
 body {
   font-family: 'Lato', sans-serif;
-  background: linear-gradient(180deg, var(--dark) 0%, var(--regular) 100%);
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
 }
 .header {
   display: flex;
@@ -44,26 +48,28 @@ body {
   display: flex;
   flex-direction: row;
   width: 25%;
-  height: 50px;
+  height: 40px;
 }
 .custom-tab {
   color: white;
-  border: 1px solid white !important;
-  background-color: var(--dark) !important;
+  border: 1px solid #647299 !important;
+  background-color: #181F32 !important;
   border-radius: 15px;
   text-align: center;
   margin-left: 2px;
   font-size: 1.8rem;
-  padding: 13px 2px !important;
+  padding: 8px 2px !important;
+  box-shadow: 0px 3px 0px #647299;
 }
 .custom-tab--selected {
-  color: var(--dark);
-  background-color: white !important;
+  color: white !important;
+  background-color: #647299 !important;
   border-radius: 15px;
-  border: 1px solid var(--dark) !important;
+  border: 1px solid #181F32 !important;
   font-size: 1.8rem;
   text-align: center;
-  padding: 13px 2px !important;
+  padding: 8px 2px !important;
+  box-shadow: 0px 3px 0px #181F32;
 }
 .custom-subtab {
   color: white;
@@ -89,16 +95,8 @@ body {
 .tabs-subgraph {
   width: 100%;
 }
-/* #tab-metrica {
-  position: absolute;
-  left: 15px;
-}
-#tab-image {
-  position: absolute;
-  left: 17px;
-  top: 68px;
 
-} */
+
 .tab-section {
   display: flex;
   justify-content: center !important;
@@ -110,129 +108,27 @@ h2 {
   font-weight: 400;
   text-align: center;
 }
-.principal-image {
-  background: rgba(255, 255, 255, 0.03);
-  width: 90vw;
-  height: 85%;
-  display: flex;
-  flex-direction: row;
-  border-radius: 24px;
-  align-items: center;
+h3 {
+  font-size: 3.0rem;
+  font-weight: 400;
+  margin: 0;
 }
-.graph-container {
-  position: relative;
-  width: 60%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+h4 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin: 0;
 }
-.image-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-.image-container p {
-  color: white;
+p {
   font-size: 1.3rem;
-  text-align: center;
-}
-.controls-container {
-  width: 40%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center !important;
-  margin-bottom: 10px;
-}
-.sliders {
-  width: 80%;
-  margin-right: 20px;
-  margin-bottom: 10px;
-}
-.controls-container h3 {
-  font-size: 2.8rem;
   font-weight: 400;
-  text-align: center;
-  color: white;
+  margin: 0;
 }
-
-/* Sliders  */
-.rc-slider-mark-text {
-  color: white;
-}
-
-.blur-buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  height: 50px;
-  width: 100%;
-  margin-top: 5px;
-}
-.blur-buttons button{
-  width: 50%;
-}
-.controls-container button {
-  background-color: var(--alter);
-  color: white;
-  text-align: center;
-  border-radius: 13px;
-  font-size: 1.8rem;
-  padding: 0 15px;
-  margin-right: 20px;
-  border: 0px white solid !important;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-
-.controls-container button:active {
-  background-color: var(--dark);
-}
-.controls-container #reset {
-  background-color: #C4C4C4;
-  color: var(--regular);
-  font-weight: 400;
-  font-size: 1.8rem;
-  margin-top: 10px;
-}
-.controls-container #reset:active {
-  background-color: var(--dark);
-  color: white;
-  font-weight: 400;
-  font-size: 1.8rem;
-}
-.graph-buttons {
-  /* position: absolute; */
-  display: flex;
-  flex-direction: row;
-  width: 60%;
-  justify-content: space-between;
-  margin: auto;
-  height: 35px;
-  /* right: 101px;
-  bottom: 65px; */
-}
-.graph-buttons button {
-  border-radius: 13px;
-  background-color: var(--alter);
-  color: white;
-  text-align: center;
-  width: 50%;
-  border: 0px white solid !important;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  margin: 0px 3px;
-}
-.graph-buttons button:active {
-  background-color: var(--dark);
-}
-
 
 
 
 /* Metrica  */
 
-.principal-metrica {
+.principal-metrica-cansat {
   /* background: rgba(255, 255, 255, 0.01); */
   width: 90vw;
   border-radius: 10px;
@@ -242,6 +138,18 @@ h2 {
     "altitud coor coor temp presion humedad"
     "acel acel acel gra gra gra "
     "giro giro giro gra gra gra "
+    "bat vel vel gra gra gra";
+}
+.principal-metrica-cohete {
+  /* background: rgba(255, 255, 255, 0.01); */
+  width: 90vw;
+  border-radius: 10px;
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(6, 1fr);
+  grid-template-areas:
+    "buttons time coor coor pos pos"
+    "state state nada gra gra gra "
+    "state state nada  gra gra gra "
     "bat vel vel gra gra gra";
 }
 .card-1 {
@@ -283,21 +191,9 @@ h2 {
   margin: 2px;
   /* box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.08); */
 }
-.principal-metrica h4 {
-  font-size: 1.8rem;
-  font-weight: 400;
-  margin: 0;
-}
-.principal-metrica h3 {
-  font-size: 3.0rem;
-  font-weight: 400;
-  margin: 0;
-}
-.principal-metrica p {
-  font-size: 1.3rem;
-  font-weight: 400;
-  margin: 0;
-}
+
+
+
 .subcard-2 {
   display: flex;
   justify-content: space-around;
@@ -306,10 +202,10 @@ h2 {
   display: flex;
   justify-content: space-around;
 }
-.altitud {
+.ca-altitud {
   grid-area: altitud;
 }
-.coordenadas {
+.ca-coordenadas {
   grid-area: coor;
 }
 .values-2 h3 {
@@ -355,4 +251,97 @@ h2 {
   background-color: var(--cards);
   padding: 10px 10px;
   border-radius: 24px;
+}
+
+/* Estilos cohete */
+.co-time {
+  grid-area: time;
+}
+.co-buttons {
+  background-color: var(--dark);
+  grid-area: buttons;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.co-coordenadas {
+  grid-area: coor;
+}
+.co-position {
+  grid-area: pos;
+}
+
+button {
+  font-family: 'Lato', sans-serif;
+}
+.start-button {
+  background-color: var(--green);
+  font-size: 15px;
+  border: 0px;
+  font-weight: bold;
+  border-radius: 50%;
+  color: black;
+  box-shadow: 0px 4px 0px #237B2D;
+  width: 80px;
+  height: 80px;
+}
+.stop-button {
+  background-color: var(--red);
+  border: 0px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 50%;
+  color: black;
+  box-shadow: 0px 4px 0px #9A3724;
+  width: 80px;
+  height: 80px;
+}
+.stop-button:active {
+  background-color: #9A3724;
+}
+.start-button:active {
+  background-color: #237B2D;
+}
+
+.estados {
+  background-color: var(--cards);
+  border-radius: 24px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  text-align: center;
+  padding: 10px;
+  margin: 2px;
+  grid-area: state;
+}
+.estado {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5px 0;
+}
+
+.estado > div {
+  background-color: var(--green);
+  width: 5px;
+  height: 5px;
+}
+
+/* ##Cosas que podrian ser utiles */
+.blur-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+  margin-top: 5px;
+}
+.blur-buttons button{
+  width: 50%;
+}
+.nada {
+  grid-area: nada;
 }
