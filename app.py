@@ -5,6 +5,7 @@ import os
 
 from dash_html_components.Button import Button
 from dash_html_components.Div import Div
+from dash_html_components.Section import Section
 import functions
 
 
@@ -26,10 +27,91 @@ app.layout= html.Div(
     html.Section(
       className='main',
       children=[
+        html.Section(
+          className="lateral-section",
+          children=[
+            html.Div(
+              className="buttons",
+              children = [
+                html.Button('Iniciar', className='start-button'),
+                html.Button('Detener', className='stop-button')
+              ]
+            ),
+            html.Div(
+              className= "estados",
+              children = [
+                html.Div(
+                  className="estado",
+                  children=[
+                    html.Div(id="piro1"),
+                    html.H4("Carga Pirotecnica 1")
+                  ]
+                ),
+                html.Div(
+                  className="estado",
+                  children=[
+                    html.Div(id="piro2"),
+                    html.H4("Carga Pirotecnica 2")
+                  ]
+                ),
+                html.Div(
+                  className="estado",
+                  children=[
+                    html.Div(id="igni1"),
+                    html.H4("Carga de ignición 1")
+                  ]
+                ),
+                html.Div(
+                  className="estado",
+                  children=[
+                    html.Div(id="igni2"),
+                    html.H4("Carga de ignición 2")
+                  ]
+                ),
+                html.Div(
+                  className="estado",
+                  children=[
+                    html.Div(id="switch1"),
+                    html.H4("Switch 1")
+                  ]
+                ),
+                html.Div(
+                  className="estado",
+                  children=[
+                    html.Div(id="switch2"),
+                    html.H4("Switch 2")
+                  ]
+                ),
+                html.Div(
+                  className="estado",
+                  children=[
+                    html.Div(id="switch3"),
+                    html.H4("Switch 3")
+                  ]
+                ),
+              ]
+            ),
+            html.Div(
+              className="card fecha",
+              children = [
+                html.H4("20-08-2021"),
+                html.H4("17:43"),
+              ]
+            ),
+            html.Div(
+              className="card co-time",
+              children = [
+                html.H4("Tiempo de Misión"),
+                html.H3("00:00"),
+              ]
+            ),
+          ]
+        ),
         # iniciamos componente de los tabs (las pestañas para cambiar de métrica a imagen)
         dcc.Tabs(className='main-tabs',
                   value='tab-cohete',children=[
           # iniciamos el primer tab de metrica
+          #### COHETE SECCIÓN 
           dcc.Tab(id='tab-cohete',
                   className='custom-tab',
                   selected_className='custom-tab--selected', 
@@ -53,36 +135,29 @@ app.layout= html.Div(
                         html.Div(
                           className='principal-metrica-cohete',
                           children=[
-                            # Sección BOTONES
-                            html.Div(
-                              className="card-1 co-buttons",
-                              children = [
-                                html.Button('Iniciar', className='start-button'),
-                                html.Button('Detener', className='stop-button')
-                              ]
-                            ),
                             # Sección ALTITUD
                             html.Div(
-                              className="card-1 co-time",
+                              className="card co-altitud",
                               children = [
-                                html.H4("Tiempo de Misión"),
-                                html.H3("00:00"),
+                                html.H4("Altitud"),
+                                html.H3("120"),
+                                html.P("metros")
                               ]
                             ),
                             # Sección COORDENADAS
                             html.Div(
-                              className=("card-2 co-coordenadas"),
+                              className=("card co-coordenadas"),
                               children = [
                                 html.H4("Coordenadas"),
                                 html.Div(
-                                  className="subcard-2 values-2",
+                                  className="subcard values-2",
                                   children = [
                                     html.H3("128.5"),
                                     html.H3("-103.9")
                                   ]
                                 ),
                                 html.Div(
-                                  className= "subcard-2 uds",
+                                  className= "subcard",
                                   children = [
                                     html.P("Latitud"),
                                     html.P("Longitud")
@@ -90,13 +165,13 @@ app.layout= html.Div(
                                 )
                               ]
                             ),
-                            # Sección ACELEROMETRO
+                            # Sección POSICION
                             html.Div(
-                              className=("card-3 co-position"),
+                              className=("card co-position"),
                               children = [
                                 html.H4("Posición"),
                                 html.Div(
-                                  className="subcard-3 values-3",
+                                  className="subcard",
                                   children = [
                                     html.H3("128.5"),
                                     html.H3("-103.9"),
@@ -104,7 +179,7 @@ app.layout= html.Div(
                                   ]
                                 ),
                                 html.Div(
-                                  className= "subcard-3 uds",
+                                  className= "subcard",
                                   children = [
                                     html.P("Eje X"),
                                     html.P("Eje Y"),
@@ -113,79 +188,17 @@ app.layout= html.Div(
                                 )
                               ]
                             ),
-                            # EStados
-                            html.Div(
-                              className= "estados",
-                              children = [
-                                html.Div(
-                                  className="estado",
-                                  children=[
-                                    html.Div(id="piro1"),
-                                    html.H4("Carga Pirotecnica 1")
-                                  ]
-                                ),
-                                html.Div(
-                                  className="estado",
-                                  children=[
-                                    html.Div(id="piro2"),
-                                    html.H4("Carga Pirotecnica 2")
-                                  ]
-                                ),
-                                html.Div(
-                                  className="estado",
-                                  children=[
-                                    html.Div(id="igni1"),
-                                    html.H4("Carga de ignición 1")
-                                  ]
-                                ),
-                                html.Div(
-                                  className="estado",
-                                  children=[
-                                    html.Div(id="igni2"),
-                                    html.H4("Carga de ignición 2")
-                                  ]
-                                ),
-                                html.Div(
-                                  className="estado",
-                                  children=[
-                                    html.Div(id="switch1"),
-                                    html.H4("Switch 1")
-                                  ]
-                                ),
-                                html.Div(
-                                  className="estado",
-                                  children=[
-                                    html.Div(id="switch2"),
-                                    html.H4("Switch 2")
-                                  ]
-                                ),
-                                html.Div(
-                                  className="estado",
-                                  children=[
-                                    html.Div(id="switch3"),
-                                    html.H4("Switch 3")
-                                  ]
-                                ),
-                              ]
-                            ),
-                            html.Div(className="card-1 nada"),
+                            html.Div(className="card nada"),
                             # Sección VELOCIDAD
                             html.Div(
-                              className="card-1 velocidad",
+                              className="card velocidad",
                               children = [
-                                html.H4("Velocidad"),
-                                html.H3("30"),
-                                html.P("m/s")
+                                # html.H4("Velocidad"),
+                                # html.H3("30"),
+                                # html.P("m/s")
                               ]
                             ),
-                            # Sección FECHA
-                            html.Div(
-                              className="card-1 fecha",
-                              children = [
-                                html.H4("20-08-2021"),
-                                html.H4("17:43"),
-                              ]
-                            ),
+                            
                             # Sección GRAFICA
                             html.Div(
                               className="card-graph",
@@ -197,7 +210,7 @@ app.layout= html.Div(
                                     dcc.Tab( id="ac-gi-graph",
                                       className="custom-subtab",
                                       selected_className='custom-subtab--selected',
-                                      label="Cansat",
+                                      label="Graficas",
                                       value="ac-gi-graph",
                                       children=[
                                         html.Div(
@@ -235,7 +248,7 @@ app.layout= html.Div(
                       ]
                     )
                   ]),
-          #contenido del segundo tab de imagen 
+          #### CANSAT SECCIÓN 
           dcc.Tab(id='tab-image',
                   className='custom-tab', 
                   selected_className='custom-tab--selected',
@@ -254,7 +267,7 @@ app.layout= html.Div(
                           children=[
                             # Sección ALTITUD
                             html.Div(
-                              className="card-1 ca-altitud",
+                              className="card ca-altitud",
                               children = [
                                 html.H4("Altitud"),
                                 html.H3("120"),
@@ -263,18 +276,18 @@ app.layout= html.Div(
                             ),
                             # Sección COORDENADAS
                             html.Div(
-                              className=("card-2 ca-coordenadas"),
+                              className=("card ca-coordenadas"),
                               children = [
                                 html.H4("Coordenadas"),
                                 html.Div(
-                                  className="subcard-2 values-2",
+                                  className="subcard values-2",
                                   children = [
                                     html.H3("128.5"),
                                     html.H3("-103.9")
                                   ]
                                 ),
                                 html.Div(
-                                  className= "subcard-2 uds",
+                                  className= "subcard",
                                   children = [
                                     html.P("Latitud"),
                                     html.P("Longitud")
@@ -284,7 +297,7 @@ app.layout= html.Div(
                             ),
                             # Sección TEMPERATURA
                             html.Div(
-                              className="card-1 temperatura",
+                              className="card temperatura",
                               children = [
                                 html.H4("Temperatura"),
                                 html.H3("30"),
@@ -293,7 +306,7 @@ app.layout= html.Div(
                             ),
                             # Sección PRESION
                             html.Div(
-                              className="card-1 presión",
+                              className="card presión",
                               children = [
                                 html.H4("Presión"),
                                 html.H3("2"),
@@ -302,7 +315,7 @@ app.layout= html.Div(
                             ),
                             # Sección HUMEDAD
                             html.Div(
-                              className="card-1 humedad",
+                              className="card humedad",
                               children = [
                                 html.H4("Humedad"),
                                 html.H3("3"),
@@ -310,11 +323,11 @@ app.layout= html.Div(
                             ),
                             # Sección ACELEROMETRO
                             html.Div(
-                              className=("card-3 acelerometro"),
+                              className=("card acelerometro"),
                               children = [
                                 html.H4("Acelerometro"),
                                 html.Div(
-                                  className="subcard-3 values-3",
+                                  className="subcard values-3",
                                   children = [
                                     html.H3("128.5"),
                                     html.H3("-103.9"),
@@ -322,7 +335,7 @@ app.layout= html.Div(
                                   ]
                                 ),
                                 html.Div(
-                                  className= "subcard-3 uds",
+                                  className= "subcard",
                                   children = [
                                     html.P("Eje X"),
                                     html.P("Eje Y"),
@@ -333,11 +346,11 @@ app.layout= html.Div(
                             ),
                             # Sección GIROSCOPIO
                             html.Div(
-                              className=("card-3 giroscopio"),
+                              className=("card giroscopio"),
                               children = [
                                 html.H4("Giroscopio"),
                                 html.Div(
-                                  className="subcard-3 values-3",
+                                  className="subcard values-3",
                                   children = [
                                     html.H3("128.5"),
                                     html.H3("-103.9"),
@@ -345,7 +358,7 @@ app.layout= html.Div(
                                   ]
                                 ),
                                 html.Div(
-                                  className= "subcard-3 uds",
+                                  className= "subcard",
                                   children = [
                                     html.P("Eje X"),
                                     html.P("Eje Y"),
@@ -356,19 +369,11 @@ app.layout= html.Div(
                             ),
                             # Sección VELOCIDAD
                             html.Div(
-                              className="card-1 velocidad",
+                              className="card velocidad",
                               children = [
                                 html.H4("Velocidad"),
                                 html.H3("30"),
                                 html.P("m/s")
-                              ]
-                            ),
-                            # Sección FECHA
-                            html.Div(
-                              className="card-1 fecha",
-                              children = [
-                                html.H4("20-08-2021"),
-                                html.H4("17:43"),
                               ]
                             ),
                             # Sección GRAFICA
@@ -382,7 +387,7 @@ app.layout= html.Div(
                                     dcc.Tab( id="ac-gi-graph2",
                                       className="custom-subtab",
                                       selected_className='custom-subtab--selected',
-                                      label="Cansat",
+                                      label="Graficas",
                                       value="ac-gi-graph",
                                       children=[
                                         html.Div(

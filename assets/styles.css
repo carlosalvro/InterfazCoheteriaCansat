@@ -18,14 +18,47 @@
 }
 html {
   font-size: 62.5%;
-  background: linear-gradient(180deg, rgba(46, 64, 82, 0.82) 0%, #6A836C 100%);
   height: 100vh;
 }
 body {
   font-family: 'Lato', sans-serif;
+  background: linear-gradient(180deg, rgba(46, 64, 82, 0.82) 0%, #6A836C 100%);
   background-size: cover;
-  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
+h2 {
+  color: white;
+  font-size: 4.2rem;
+  font-weight: 400;
+  text-align: center;
+}
+h3 {
+  font-size: 3.0rem;
+  font-weight: 400;
+  margin: 0;
+}
+h4 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin: 0;
+}
+p {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+
+.main-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* HEADER  */
 .header {
   display: flex;
   justify-content: center;
@@ -34,22 +67,128 @@ body {
   width: 250px;
   margin: 3px auto;
 }
-.main-container {
-  width: 100%;
-  height: 100%;
-}
+
+/* MAIN */
 .main {
-  display: flex;
+  width: 95%;
+  height: 100%;
+  display: grid;
+  grid-template: 1fr / 22% 78%;
+  grid-template-areas: "lateral tabs";
   justify-content: center;
+  align-items: stretch;
   position: relative;
 }
+.main > #undefined-parent {
+  grid-area: "tabs";
+  position: relative;
+}
+/* LATERAL SECTION STYLE */
+/* LOS ESTILOS DE CARD-1 ESTAN MÁS ABAJO */
+.lateral-section {
+  margin-top: 50px;
+  border-radius: 10px;
+  grid-area: "lateral";
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(2, 1fr);
+  grid-template-areas:
+    "buttons buttons"
+    "state state"
+    "state state"
+    "bat time";
+}
+.lateral-section > div {
+  max-height: 252px;
+  margin: 2px;
+}
+button {
+  font-family: 'Lato', sans-serif;
+}
+.start-button {
+  background-color: var(--green);
+  font-size: 15px;
+  border: 0px;
+  font-weight: bold;
+  border-radius: 50%;
+  color: black;
+  box-shadow: 0px 4px 0px #237B2D;
+  width: 80px;
+  height: 80px;
+}
+.stop-button {
+  background-color: var(--red);
+  border: 0px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 50%;
+  color: black;
+  box-shadow: 0px 4px 0px #9A3724;
+  width: 80px;
+  height: 80px;
+}
+.stop-button:active {
+  background-color: #9A3724;
+}
+.start-button:active {
+  background-color: #237B2D;
+}
+.buttons {
+  background-color: var(--dark);
+  border-radius: 24px;
+  grid-area: buttons;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.estados {
+  background-color: var(--cards);
+  border-radius: 24px;
+  color: white;
+  padding: 10px 50px;
+  margin: 2px;
+  grid-area: state;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: flex-start;
+  text-align: center;
+}
+.estado {
+  display: flex;
+  font-size: 1.5rem;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5px 0;
+}
+.estado h4 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+.estado > div {
+  background-color: var(--green);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  margin-right: 25px;
+}
+/* .fecha {
+  grid-area: bat;
+} */
+
+/* TABS SECTION  */
+
 .main-tabs {
   position: absolute;
   display: flex;
   flex-direction: row;
   width: 25%;
   height: 40px;
+  left: -285px;
 }
+
+/* ESTILO DE LOS BOTONES TABS y SUBTABS*/
 .custom-tab {
   color: white;
   border: 1px solid #647299 !important;
@@ -95,112 +234,71 @@ body {
 .tabs-subgraph {
   width: 100%;
 }
+/* ------------------------------------ */
 
-
+/* GENERAL TAB SECTION estilo para tabs cohete y cansat */
 .tab-section {
+  width: 100%;
   display: flex;
   justify-content: center !important;
   flex-direction: column;
 }
-h2 {
+
+/* ESTILO DE LAS TARJETAS PARA MOSTRAR LOS CONTENIDOS */
+.card {
+  background-color: var(--cards);
+  border-radius: 24px;
   color: white;
-  font-size: 4.2rem;
-  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
   text-align: center;
+  padding: 3px;
+  margin: 2px;
 }
-h3 {
-  font-size: 3.0rem;
-  font-weight: 400;
-  margin: 0;
-}
-h4 {
-  font-size: 1.8rem;
-  font-weight: 400;
-  margin: 0;
-}
-p {
-  font-size: 1.3rem;
-  font-weight: 400;
-  margin: 0;
+.subcard {
+  display: flex;
+  justify-content: space-around;
 }
 
-
-
-/* Metrica  */
-
-.principal-metrica-cansat {
+/* COHETE  */
+.principal-metrica-cohete {
   /* background: rgba(255, 255, 255, 0.01); */
-  width: 90vw;
+  width: 100%;
+  border-radius: 10px;
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(6, 1fr);
+  grid-template-areas:
+    "altitud coor coor pos pos pos"
+    "nada nada gra gra gra gra"
+    "nada nada  gra gra gra gra"
+    "vel vel gra gra gra gra";
+}
+.co-time {
+  grid-area: time;
+}
+.co-altitud {
+  grid-area: "altitud";
+}
+.co-coordenadas {
+  grid-area: coor;
+}
+.co-position {
+  grid-area: pos;
+}
+
+/* SECCION CANSAT */
+.principal-metrica-cansat {
+  width: 100%;
   border-radius: 10px;
   display: grid;
   grid-template: repeat(4, 1fr) / repeat(6, 1fr);
   grid-template-areas:
     "altitud coor coor temp presion humedad"
-    "acel acel acel gra gra gra "
-    "giro giro giro gra gra gra "
-    "bat vel vel gra gra gra";
-}
-.principal-metrica-cohete {
-  /* background: rgba(255, 255, 255, 0.01); */
-  width: 90vw;
-  border-radius: 10px;
-  display: grid;
-  grid-template: repeat(4, 1fr) / repeat(6, 1fr);
-  grid-template-areas:
-    "buttons time coor coor pos pos"
-    "state state nada gra gra gra "
-    "state state nada  gra gra gra "
-    "bat vel vel gra gra gra";
-}
-.card-1 {
-  background-color: var(--cards);
-  border-radius: 24px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  text-align: center;
-  padding: 10px;
-  margin: 2px;
-  /* box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.08); */
-}
-.card-2 {
-  background-color: var(--cards);
-  border-radius: 24px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  text-align: center;
-  padding: 10px;
-  margin: 2px;
-  /* box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.08); */
-}
-.card-3 {
-  background-color: var(--cards);
-  border-radius: 24px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  text-align: center;
-  padding: 10px;
-  margin: 2px;
-  /* box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.08); */
-}
-
-
-
-.subcard-2 {
-  display: flex;
-  justify-content: space-around;
-}
-.subcard-3 {
-  display: flex;
-  justify-content: space-around;
+    "acel acel gra gra gra gra "
+    "giro giro gra gra gra gra "
+    "vel vel gra gra gra gra";
 }
 .ca-altitud {
   grid-area: altitud;
@@ -229,14 +327,12 @@ p {
 .velocidad {
   grid-area: vel;
 }
-.fecha {
-  grid-area: bat;
-}
+
+
+/* ESTILOS GRAFICAS */
 .card-graph {
-  /* background-color: var(--cards); */
   border-radius: 24px;
   grid-area: gra;
-  /* padding: 15px 15px; */
   margin: 2px;
   display: flex;
   justify-content: center;
@@ -253,95 +349,8 @@ p {
   border-radius: 24px;
 }
 
-/* Estilos cohete */
-.co-time {
-  grid-area: time;
-}
-.co-buttons {
-  background-color: var(--dark);
-  grid-area: buttons;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-.co-coordenadas {
-  grid-area: coor;
-}
-.co-position {
-  grid-area: pos;
-}
-
-button {
-  font-family: 'Lato', sans-serif;
-}
-.start-button {
-  background-color: var(--green);
-  font-size: 15px;
-  border: 0px;
-  font-weight: bold;
-  border-radius: 50%;
-  color: black;
-  box-shadow: 0px 4px 0px #237B2D;
-  width: 80px;
-  height: 80px;
-}
-.stop-button {
-  background-color: var(--red);
-  border: 0px;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 50%;
-  color: black;
-  box-shadow: 0px 4px 0px #9A3724;
-  width: 80px;
-  height: 80px;
-}
-.stop-button:active {
-  background-color: #9A3724;
-}
-.start-button:active {
-  background-color: #237B2D;
-}
-
-.estados {
-  background-color: var(--cards);
-  border-radius: 24px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-content: center;
-  text-align: center;
-  padding: 10px;
-  margin: 2px;
-  grid-area: state;
-}
-.estado {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 5px 0;
-}
-
-.estado > div {
-  background-color: var(--green);
-  width: 5px;
-  height: 5px;
-}
-
 /* ##Cosas que podrian ser utiles */
-.blur-buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  height: 50px;
-  width: 100%;
-  margin-top: 5px;
-}
-.blur-buttons button{
-  width: 50%;
-}
+
 .nada {
   grid-area: nada;
 }
