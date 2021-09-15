@@ -39,6 +39,32 @@ def plot_graphs_ace_giro():
   fig.update_yaxes(title_text="Giroscopio", row=2, col=1)
   return fig
 
+def plot_map(la=20.656280, lo=-103.324096):
+  fig = go.Figure(go.Scattermapbox(
+      lat = [str(la)],
+      lon = [str(lo)],
+      mode='markers',
+      marker=go.scattermapbox.Marker(
+              size=14
+          ),
+      text = ['Cucei']
+  ))
+  fig.update_layout(width=550, 
+                    height=330, 
+                    margin=dict(l=4, r=4, t=4, b=4),
+                    paper_bgcolor='rgba(0,0,0,0)',
+                    plot_bgcolor='rgba(0,0,0,0)',
+                    mapbox_style="open-street-map",
+                    mapbox = dict(
+                        center=go.layout.mapbox.Center(
+                            lat=la,
+                            lon=lo
+                            ),
+                        zoom=14
+                        )
+                    )
+  return fig
+
 ## Función para crear las meshgrids del cilindro
 ## Dado el radio r, la altura h, y la cordenada de la base a
 def cylinder(r,h, a = 0, nt = 100, nv = 50):

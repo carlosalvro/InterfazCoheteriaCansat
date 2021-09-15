@@ -20,7 +20,7 @@ app.layout= html.Div(
     # CABEZERA DONDE VA EL LOGO
     html.Div(
       className='header', children=[
-        html.Img(src='./assets/Images/Kan-Horizontal.png', className='logo')
+        html.Img(src='./assets/Images/unnamed.png', className='logo')
       ]
     ),
     # aqui va todo lo demás
@@ -33,9 +33,16 @@ app.layout= html.Div(
             html.Div(
               className="buttons",
               children = [
-                html.Button('Iniciar', className='start-button'),
-                html.Button('Detener', className='stop-button')
+                html.Div(
+                  className="start-stop-buttons",
+                  children = [
+                    html.Button('Iniciar', className='start-button'),
+                    html.Button('Detener', className='stop-button')
+                  ]
+                ),
+                html.Button("Generar Reporte", className= "report-button") 
               ]
+
             ),
             html.Div(
               className= "estados",
@@ -217,7 +224,7 @@ app.layout= html.Div(
                                           className="graph-ace-giro-container",
                                           children=[
                                             dcc.Graph(
-                                              figure=functions.plot_graphs_ace_giro()
+                                              figure=functions.plot_map()
                                             )
                                           ]
                                         )
