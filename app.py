@@ -36,13 +36,12 @@ app.layout= html.Div(
                 html.Div(
                   className="start-stop-buttons",
                   children = [
-                    html.Button('Iniciar', className='start-button'),
-                    html.Button('Detener', className='stop-button')
+                    html.Button('Iniciar', className='start-button', id='start-button'),
+                    html.Button('Detener', className='stop-button', id='stop-button')
                   ]
                 ),
                 html.Button("Generar Reporte", className= "report-button") 
               ]
-
             ),
             html.Div(
               className= "estados",
@@ -106,10 +105,10 @@ app.layout= html.Div(
               ]
             ),
             html.Div(
-              className="card co-time",
+              className="card time",
               children = [
                 html.H4("Tiempo de Misión"),
-                html.H3("00:00"),
+                html.H3(id='mision-time' ,children="00:00"),
               ]
             ),
           ]
@@ -198,7 +197,7 @@ app.layout= html.Div(
                             html.Div(className="card nada"),
                             # Sección VELOCIDAD
                             html.Div(
-                              className="card velocidad",
+                              className="card co-velocidad",
                               children = [
                                 # html.H4("Velocidad"),
                                 # html.H3("30"),
@@ -212,16 +211,16 @@ app.layout= html.Div(
                               children= [
                                 dcc.Tabs(
                                   className="tabs-subgraph",
-                                  value="ac-gi-graph",
+                                  value="map-graph",
                                   children = [
-                                    dcc.Tab( id="ac-gi-graph",
+                                    dcc.Tab( id="map-graph",
                                       className="custom-subtab",
                                       selected_className='custom-subtab--selected',
-                                      label="Graficas",
-                                      value="ac-gi-graph",
+                                      label="Mapa",
+                                      value="map-graph",
                                       children=[
                                         html.Div(
-                                          className="graph-ace-giro-container",
+                                          className="graph-map-container",
                                           children=[
                                             dcc.Graph(
                                               figure=functions.plot_map()
@@ -256,11 +255,11 @@ app.layout= html.Div(
                     )
                   ]),
           #### CANSAT SECCIÓN 
-          dcc.Tab(id='tab-image',
+          dcc.Tab(id='tab-cansat',
                   className='custom-tab', 
                   selected_className='custom-tab--selected',
                   label='Cansat', 
-                  value='tab-image', children=[
+                  value='tab-cansat', children=[
                     ###Contenido del segundo tab
                     ## IMAGEN
                     html.Div(
@@ -374,13 +373,38 @@ app.layout= html.Div(
                                 )
                               ]
                             ),
-                            # Sección VELOCIDAD
-                            html.Div(
-                              className="card velocidad",
-                              children = [
-                                html.H4("Velocidad"),
-                                html.H3("30"),
-                                html.P("m/s")
+                            # Sección VELOCIDAD - bateria
+                            html.Section(
+                              className="vel-bat",
+                              children=[
+                                html.Section(
+                                  className="pila",
+                                  children= [
+                                    html.Div(className="pila-head"), 
+                                    html.Div(
+                                      className="pila-body", 
+                                      children= [
+                                        html.Div(
+                                          className="pila-fondo",
+                                          children=[
+                                            html.Div(
+                                              className="pila-pila",
+                                            )
+                                          ]
+                                        ),
+                                        html.H5(id="battery-percent", children=["100%"])
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                html.Section(
+                                  className="card velocidad",
+                                  children = [
+                                    html.H4("Velocidad"),
+                                    html.H3("30"),
+                                    html.P("m/s")
+                                  ]
+                                )
                               ]
                             ),
                             # Sección GRAFICA
@@ -391,7 +415,7 @@ app.layout= html.Div(
                                   className="tabs-subgraph",
                                   value="ac-gi-graph",
                                   children = [
-                                    dcc.Tab( id="ac-gi-graph2",
+                                    dcc.Tab( id="ac-gi-graph",
                                       className="custom-subtab",
                                       selected_className='custom-subtab--selected',
                                       label="Graficas",
