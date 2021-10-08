@@ -8,8 +8,8 @@ import plotly.express as px
 import serial
 import json
 import re
-from datetime import date, datetime
-
+from datetime import date, datetime, timedelta
+import time
 
 
 
@@ -17,10 +17,16 @@ from datetime import date, datetime
 ################################################
 
 ## Grafica de lineas acelerometro y giroscopio
-def plot_graphs_ace_giro():
-  x = [i for i in range(1,51)]
-  y1 = np.random.randint(-100,100,50)
-  y2 = np.random.randint(-100,100,50)
+def plot_graphs_ace_giro(dic = None):
+  if dic == None: #Si no se recibe nada que la gráficas muestren 0
+    x = [0]
+    y1 = [0]
+    y2 = [0]
+  else:
+    y1 = dic['A']
+    y2 = dic['G']
+    x = [i for i in range(len(y1))] 
+
   fig = make_subplots(rows=2, cols=1)
 
   fig.append_trace(go.Scatter(x=x, y=y1, line=dict(color='#F24333')), row=1, col=1)
@@ -209,7 +215,45 @@ def open_serial():
   ]
   return output
 
+def red_green(i):
+  if i==1:
+    return {'background-color':'#F95738'}
+  elif i==0:
+    return {'background-color':'#3BC14A'}
 
+def random_generator():
+  p1    = np.random.randint(0,2) 
+  p2    = np.random.randint(0,2) 
+  i1    = np.random.randint(0,2) 
+  i2    = np.random.randint(0,2) 
+  sw1   = np.random.randint(0,2)
+  sw2   = np.random.randint(0,2)
+  sw3   = np.random.randint(0,2)
+  co_al = str(np.random.randint(0,401))
+  co_la = str(np.random.randint(0,401))
+  co_lo = str(np.random.randint(0,401))
+  px    = str(np.random.randint(0,401))
+  py    = str(np.random.randint(0,401))
+  pz    = str(np.random.randint(0,401))
+  ca_al = str(np.random.randint(0,401))
+  ca_la = str(np.random.randint(0,401))
+  ca_lo = str(np.random.randint(0,401))
+  ca_te = str(np.random.randint(0,41))
+  ca_pr = str(np.random.randint(0,3))
+  ca_hu = str(np.random.randint(0,3))
+  ca_ax = str(np.random.randint(-400,401))
+  ca_ay = str(np.random.randint(-400,401))
+  ca_az = str(np.random.randint(-400,401))
+  ca_gx = str(np.random.randint(-400,401))
+  ca_gy = str(np.random.randint(-400,401))
+  ca_gz = str(np.random.randint(-400,401))
+  ca_ve = str(np.random.randint(-400,401))
+  bat   = np.random.randint(0,101)
+
+  dic = {"P1":  p1 ,  "P2":p2   ,"I1":i1   ,"I2":i2   ,"Sw1":sw1  ,"Sw2":sw2  ,"Sw3":sw3  ,"co-Al":co_al,"co-La":co_la,"co-Lo":co_lo,"Px":px   ,"Py":py   ,"Pz":pz   ,"ca-Al":ca_al,"ca-La":ca_la,"ca-Lo":ca_lo,"ca-Te":ca_te,"ca-Pr":ca_pr,"ca-Hu":ca_hu,"ca-Ax":ca_ax,"ca-Ay":ca_ay,"ca-Az":ca_az,"ca-Gx":ca_gx,"ca-Gy":ca_gy,"ca-Gz":ca_gz,"ca-Ve":ca_ve,"Bat":bat }
+
+  # dic = {'Al':al,'La':la,'Lo':lo,'Te':te,'Pr':pr,'Hu':hu,'Ax':ax,'Ay':ay,'Az':az,'Gx':gx,'Gy':gy,'Gz':gz, 'Ve':ve, 'Bat':bat}
+  return dic
 
 def today_date():
   today = date.today()
@@ -218,3 +262,26 @@ def today_date():
 def current_time():
   now = datetime.now()
   return now.strftime("%H:%M")
+
+
+# Le saca la norma a los vectores aceleración y giroscopio
+def graphs_values(output):
+  ax = float(output['ca-Ax'])
+  ay = float(output['ca-Ay'])
+  az = float(output['ca-Az'])
+  gx = float(output['ca-Gx'])
+  gy = float(output['ca-Gy'])
+  gz = float(output['ca-Gz'])
+
+  g = np.linalg.norm(np.array([gx,gy,gz]))
+  a = np.linalg.norm(np.array([ax,ay,az]))
+  return g,a
+
+#Contador tipo cronometro para contar el tiempo de misión transcurrido
+def get_time_mision(starter_time):
+  now_time = time.time()
+  secs = int(now_time - starter_time)
+  sec2time = timedelta(seconds=secs)
+  timer = (datetime.min  + sec2time).time()
+  timer = timer.strftime("%M:%S")
+  return timer
