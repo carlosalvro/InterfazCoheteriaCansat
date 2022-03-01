@@ -316,9 +316,9 @@ button {
   grid-template: repeat(4, 1fr) / repeat(6, 1fr);
   grid-template-areas:
     "altitud coor coor temp presion humedad"
-    "acel acel gra gra gra gra "
-    "giro giro gra gra gra gra "
-    "vel vel gra gra gra gra";
+    "acel acel co2 gra gra gra "
+    "giro giro oz gra gra gra "
+    "vel vel nada gra gra gra";
 }
 .ca-altitud {
   grid-area: altitud;
@@ -343,6 +343,12 @@ button {
 }
 .giroscopio {
   grid-area: giro;
+}
+.dioxido {
+  grid-area: co2;
+}
+.ozono {
+  grid-area: oz;
 }
 .velocidad {
   width: 75%;

@@ -331,6 +331,22 @@ app.layout= html.Div(
                                 html.H3(id='ca-humedad', children="0"),
                               ]
                             ),
+                            html.Section(
+                              className="card dioxido",
+                              children = [
+                                html.H4("Dioxido de Carbono"),
+                                html.H3(id = "ca-co2", children="0"),
+                                html.P("ppm")
+                              ]
+                            ),
+                            html.Section(
+                              className="card ozono",
+                              children = [
+                                html.H4("Ozono"),
+                                html.H3(id = "ca-ozono", children="0"),
+                                html.P("ppm")
+                              ]
+                            ),
                             # Sección ACELEROMETRO
                             html.Div(
                               className=("card acelerometro"),
